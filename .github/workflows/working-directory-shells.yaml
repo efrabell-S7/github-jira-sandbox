@@ -18,33 +18,33 @@ jobs:
       - name: Change Working Dir
         working-directory: /home/runner
         run: pwd
-  # display-wd-info-windows:
-  #   runs-on: windows-latest
-  #   defaults:
-  #     run:
-  #       shell: pwsh
-  #   steps:
-  #     - name: Display Working Directory & List Files
-  #       run: |
-  #         Get-Location
-  #         dir
-  #         echo $env:GITHUB_SHA
-  #         echo $env:GITHUB_REPOSITORY
-  #         echo $env:GITHUB_WORKSPACE
-  #     - name: Python Shell
-  #       shell: python
-  #       run: |
-  #         import platform 
-  #         print(platform.processor())
+  display-wd-info-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Display Working Directory & List Files
+        run: |
+          Get-Location
+          dir
+          echo $env:GITHUB_SHA
+          echo $env:GITHUB_REPOSITORY
+          echo $env:GITHUB_WORKSPACE
+      - name: Python Shell
+        shell: python
+        run: |
+          import platform 
+          print(platform.processor())
   checkout-repository:
     runs-on: ubuntu-latest
-    needs: display-wd-info-linux
     steps:
       - name: List Files Before
         run: ls -a
       - name: Checkout
         run: 
           git init
+          echo "Origin URL is https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git"
           git remote add origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY.git"
           git fetch origin
           git checkout main
