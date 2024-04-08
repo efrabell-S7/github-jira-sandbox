@@ -7,7 +7,7 @@ jobs:
     run-shell-commands:
       runs-on: ubuntu-latest
       steps:
-          - name: echo a string
+          - name: Echo Test String
             run: echo "Testing CLI"
           - name: Multiline Command
             run: |
@@ -22,9 +22,7 @@ jobs:
       runs-on: windows-latest
       needs: run-shell-commands
       steps:
-        - name: echo a string
+        - name: Echo Window's String
           run: Write-Output "Windows String"
-        - name: Error Step
-          run: doesnotexist
-
-		
+        # - name: Error Step
+        #   run: doesnotexist
